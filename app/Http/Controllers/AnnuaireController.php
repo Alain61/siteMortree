@@ -17,6 +17,16 @@ class AnnuaireController extends Controller
     //avec la recherche dans le champ de recherche du formulaire
     public function annuaire(Request $request): View
     {
+        $filters =[];
+        if($request->search){
+            $filters['search']= $request->search;
+        }
+        if($request->category){
+            $filters['category']=$request->category;
+        }
+        if($request->tag){
+            $filters['tag']= $request->tag;
+        }
         return $this->annuairesView($request->search ? ['search' => $request->search] : []);
     }
 
@@ -41,8 +51,6 @@ class AnnuaireController extends Controller
             'annuaires'=> Annuaire::filters($filters)->latest()->paginate(6),
             'category'=>$category,
             'tag'=>$tag,
-            
-
         ]);
     }
     //methode pour renvoyer à la page de connexion
@@ -53,9 +61,8 @@ class AnnuaireController extends Controller
     //methode pour renvoyer la vue de presentation d'une entité des annuaires (global, par catégories et par tags)
     public function show(Annuaire $annuaire): View
     {
-        $back = $annuaire->category ? 'byCategory' : 'global';
-        return view('annuaires.show', [
-            'back'=>$back,
+       
+        return view('annuaires.show', [            
             'annuaire' =>$annuaire,
         ]);
     }

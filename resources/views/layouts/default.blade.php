@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@
 
 </head>
 <body>
+    
     <header class="header">
         <div class="en-tete">
             <a href="{{ route('annuaire') }}"><img class="logo" src="{{ asset('./MortréePhotos/blason Mortrée.PNG') }}"  alt="écusson"></a><!--renvoi à la page index.html-->
@@ -40,7 +41,7 @@
                         <ul class="item-menu dropdown">
                             <li class="sous-liste drop-item"><a href="#">Les news</a></li>
                             <li class="sous-liste drop-item"><a href="#">Les évènements</a></li>
-                            <li class="sous-liste drop-item"><a href="#">Le bulletin municipal</a></li>
+                            <li class="sous-liste drop-item"><a href="#">Le Quoi de Neuf</a></li>
                             <li class="sous-liste drop-item"><a href="#">Les projets d'aménagements</a></li>
                         </ul>
                     </li>
@@ -53,7 +54,7 @@
                             <li class="sous-liste drop-item"><a href="#">Les biens communaux</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item3 mobile-item">Bien vivre à Mortrée
+                    <li class="nav-item3 mobile-item">Vivre à Mortrée
                         <ul class="item-menu1 dropdown">
                             <li class="items-sous-liste1 drop-item mobil">
                                 Mortrée et ses services
@@ -107,12 +108,12 @@
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Marché</a></li>
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Le monde de la culture
                                             et de l'élevage</a></li>
-                                    <li class="sous-item-sous-liste sous-sous-menu"><a href="annuaires.annuaire">Annuaire</a>
+                                    <li class="sous-item-sous-liste sous-sous-menu"><a href="{{ route('annuaire') }}">Annuaire</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="items-sous-liste4 drop-item mobil">
-                                Culture Sports et Loisirs
+                                Culture, Sports et Loisirs
                                 <ul class="item-sous-menu sous-menu">
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Médiathèque</a></li>
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Equipements sportif</a>
@@ -157,9 +158,9 @@
                     </li>
                     <li class="nav-item mobile-item">Contact
                         <ul class="item-menu dropdown">
-                            <li class="sous-liste drop-item"><a href="#">Connexion</a></li>
-                            <li class="sous-liste drop-item"><a href="#">Inscription</a></li>
-                            <li class="sous-liste drop-item"><a href="NousContacter.html">Nous contacter</a></li>
+                            <li class="sous-liste drop-item"><a href="{{ route('login') }}">Connexion</a></li>
+                            <li class="sous-liste drop-item"><a href="{{ route('register') }}">Inscription</a></li>
+                            <li class="sous-liste drop-item"><a href="{{ route('contact') }}">Nous contacter</a></li>
                         </ul>
                     </li>
                     <li class="nav-item mobile-item"><a href="#">C.D.C</a></li>
@@ -193,18 +194,30 @@
             </form>
         </div>
     </div>
+
+    
     
     {{-- Navigation --}}
     <nav x-data="{ open: false }" x-cloak class="relative">
         <button
             @click = "open = !open"
             @click.outside="if (open) open = false"
-            class="md:hidden w-8 h-8 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            @class([
+                'w-8 h-8 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',//peu importe ce qu'il se passe
+                'md:hidden'=>Auth::guest(),//seulement quand l'utilisateur est un guest
+            ])
+
+            
         >
+            @auth
+            <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/120x120" alt="Image de profil">   
+            @else
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
             </svg>
+            @endauth
         </button>
+
         <ul
             x-show="open"
             x-transition:enter="transition ease-out duration-200"
@@ -213,23 +226,37 @@
             x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="transform opacity-100 scale-100"
             x-transition:leave-end="transform opacity-0 scale-95"
-            class="md:hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            @class([
+                'absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
+                'md:hidden'=> Auth::guest(),
+            ])
+            
             tabindex="-1"
         >
-            <li><a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a></li>
+            @auth
+            <li><a href="{{ route('home') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mon compte</a></li>
+            <li><a href="{{ route('logout') }}"  @click.prevent="$refs.logout.submit()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Déconnexion</a></li>
+            <form x-ref="logout" action="{{ route('logout') }}" method='POST' class="hidden">
+                @csrf
+            </form>
+            @else
+            <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Connexion</a></li>
             <li>
-                <a href="" class="flex items-center px-4 py-2 font-semibold text-sm text-indigo-700 hover:bg-gray-100">
+                <a href="{{ route('register') }}" class="flex items-center px-4 py-2 font-semibold text-sm text-indigo-700 hover:bg-gray-100">
                     Inscription
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
                         <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
                     </svg>
                 </a>
             </li>
+            @endauth
         </ul>
+        
+        @guest
         <ul class="hidden md:flex space-x-12 font-semibold">
-            <li><a href="">Connexion</a></li>
+            <li><a href="{{ route('login') }}">Connexion</a></li>
             <li>
-                <a href="" class="flex items-center group text-indigo-700">
+                <a href="{{ route('register') }}" class="flex items-center group text-indigo-700">
                     Inscription
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-1 group-hover:ml-2 group-hover:mr-0 transition-all">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -237,42 +264,29 @@
                 </a>
             </li>
         </ul>
-    </nav>    
+        @endguest
+    </nav>
+    <!--si il y a une session flash, j'affiche le message et l'icone-->
+    @if(session('status'))
+    <div class="mt-10 rounded-md bg-green-50 p-4">
+        <div class="flex">
+            <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-green-800">{{ session('status') }}</p>
+            </div>
+        </div>
+    </div>  
+    @endif
+
     <main>   
-        <div class="corps">
-            <div class="sommaire-annuaire">
-                <p class="titre">Annuaire</p>
-                <p class="sous-titre">Annuaire économique</p>
-                <div class="sectionAnnuaire">Commerces<br>
-                    Commerces itinérants<br>
-                    Artisans<br>
-                    Entreprises<br>
-                    Professions liberales<br>
-                    Professions médicales et para-médicales<br>
-                    Elevage et culture<br>
-                </div>
-                <p class="sous-titre">Annuaire associatif</p>
-                <div class="sectionAnnuaire">Associations culturelles<br>
-                    Associations de Loisirs<br>
-                    Associations sportives<br>
-                </div>
-                <p class="sous-titre">Annuaire des services à la personne</p>
-                <div class="sectionAnnuaire">Professionnels de santé<br>
-                    La M.A.R.P.A.<br>
-                    Assistant(e)s maternelles<br>
-                    L'U.N.A.<br>
-                    L'A.D.M.R.<br>
-                    Assistant(e) social(e)<br>
-                </div>
-                <p class="sous-titre">Divers</p>
-                <div class="sectionAnnuaire">Agence postale<br>
-                    Médiathèque<br>
-                    Gendarmerie<br>
-                    Centre de secours<br>
-                </div>
-            </div>   
+           
         {{ $slot }}
-        </div>  
+        
+          
     </main>
 </body>
 

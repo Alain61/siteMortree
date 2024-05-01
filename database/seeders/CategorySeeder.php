@@ -21,7 +21,10 @@ class CategorySeeder extends Seeder
             'Profession libérale',
             'Agriculture/Élevage',
             'Professionnel de santé',
-            'Autres'
+            'Service à la personne',
+            'Associations',
+            'Auto-entrepreneur',
+            'Autres',
         ]);
 
         $categories->each(fn($category) => Category::create([

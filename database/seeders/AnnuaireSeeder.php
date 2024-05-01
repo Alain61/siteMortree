@@ -19,6 +19,7 @@ class AnnuaireSeeder extends Seeder
 
         Annuaire::factory(40)
             ->sequence(fn ()=>[
+                'dirigeant'=>fake()->name,
                 'category_id' => $categories->random(),
             ])
         ->create()

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('annuaires', function (Blueprint $table) {
-            $table->foreignId('category_id')->after('id')->nullable()->constrained()->nullOnDelete();
+            $table->string('dirigeant')->after('category_id')->nullable();
         });
     }
 
@@ -22,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('annuaires', function (Blueprint $table) {
-            $table->dropForeign(['category_id']);/*supprime la contrainte de clé étrangère*/
-            $table->dropColumn('category_id');/*supprime la colonne/champs category-id*/
+            $table->dropColumn('dirigeant');
         });
     }
 };
