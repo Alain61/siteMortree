@@ -8,7 +8,7 @@
     @if (!$list)
         <div class="retourAnnuaire">
             <a href="{{ route('annuaire') }}">Fermer</a>
-        </div><!--a revoir-->
+        </div>
     @else
         <div class="enSavoirPlus">
             <a href="{{ route('annuaires.show', ['annuaire' => $annuaire]) }}">
@@ -24,13 +24,13 @@
         </div>
     @endif
     <div class="align">
-        <div class="etiqMobile etiquette"><!--Category-->
+        <div class="etiqMobile etiquette">
             @if ($annuaire->category)
                 <a
                     href="{{ route('annuaires.byCategory', ['category' => $annuaire->category]) }}">{{ $annuaire->category->worker }}</a>
             @endif
         </div>
-        <div class="tags"><!--tag-->
+        <div class="tags">
             @if ($annuaire->tags->isNotEmpty())
                 <!--si une collection n'est pas vide: return true-->
                 @foreach ($annuaire->tags as $tag)
@@ -39,7 +39,6 @@
                 @endforeach
             @endif
         </div>
-
         <div class="entite-tel">
             <p class="group">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 tel">
@@ -61,13 +60,11 @@
             {{ $annuaire->adress }}
         </p>
     </div>
-
     <div class="texteEntreprise">
         @if (!$list)
             {!! nl2br(e($annuaire->content)) !!}<!--pour que chaques paragraphes apparaissent l'un en dessous de l'autre avec les retours à la ligne-->
         @endif
     </div>
-
     <div class="entite-mail">
         <p class="group">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"

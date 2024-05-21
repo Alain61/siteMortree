@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $name }}</title><!--utilisation de la fonction html special char, protege de la faille xss--> 
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <title>Page d'accueil - Commune de Mortrée</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Cherry+Bomb+One&family=Chicle&family=Galada&family=Grechen+Fuemen&family=Lemon&family=Modak&family=Pacifico&family=Permanent+Marker&family=Sedgwick+Ave+Display&family=Sofia&family=Spicy+Rice&display=swap"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Indie+Flower&family=Playball&display=swap"
         rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    @vite(['resources/css/style.css', 'resources/js/script.js'])
+    
 
 </head>
-<body>    
+
+<body>
     <header class="header">
         <div class="en-tete">
-            <a href="{{ route('accueil') }}"><img class="logo" src="{{ asset('./MortréePhotos/blason Mortrée.PNG') }}"  alt="écusson"></a><!--renvoi à la page index.html-->
-            <div class="background fondNom">
-                <div class="nom">Commune de MORTRÉE</div>
+            <a href="{{ route('accueil') }}"><img class="logo" src="./MortréePhotos/blason Mortrée.PNG" alt="écusson"></a>
+            <div class="fondNom background">
+                <div class="nom">Commune de Mortrée</div>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20 " fill="currentColor"
                 class="w-4 h-4 menu-toggle">
@@ -36,11 +43,11 @@
                         clip-rule="evenodd" />
                 </svg>
                 <ul class="nav-menu">
-                    <li class="nav-item mobile-item">A la Une
+                    <li class="nav-item mobile-item">À la Une
                         <ul class="item-menu dropdown">
                             <li class="sous-liste drop-item"><a href="#">Les news</a></li>
                             <li class="sous-liste drop-item"><a href="#">Les évènements</a></li>
-                            <li class="sous-liste drop-item"><a href="#">Le Quoi de Neuf</a></li>
+                            <li class="sous-liste drop-item"><a href="#">Le bulletin municipal</a></li>
                             <li class="sous-liste drop-item"><a href="#">Les projets d'aménagements</a></li>
                         </ul>
                     </li>
@@ -48,12 +55,12 @@
                         <ul class="item-menu dropdown">
                             <li class="sous-liste drop-item"><a href="#">Le conseil municipal</a></li>
                             <li class="sous-liste drop-item"><a href="#">Le personnel administratif</a></li>
-                            <li class="sous-liste drop-item"><a href="#">Les agents territoriaux</a></li>
+                            <li class="sous-liste drop-item"><a href="#">Le personnel technique</a></li>
                             <li class="sous-liste drop-item"><a href="#">Les démarches administratives</a></li>
                             <li class="sous-liste drop-item"><a href="#">Les biens communaux</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item3 mobile-item">Vivre à Mortrée
+                    <li class="nav-item3 mobile-item">Bien vivre à Mortrée
                         <ul class="item-menu1 dropdown">
                             <li class="items-sous-liste1 drop-item mobil">
                                 Mortrée et ses services
@@ -92,6 +99,7 @@
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">L'A.D.M.R.</a></li>
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Assistant(e)
                                             social(e)</a></li>
+
                                 </ul>
                             </li>
                             <li class="items-sous-liste3 drop-item mobil">
@@ -105,8 +113,8 @@
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Professions
                                             libérales</a></li>
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Marché</a></li>
-                                    <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Le monde de la culture
-                                            et de l'élevage</a></li>
+                                    <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Agriculture
+                                            et élevage</a></li>
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="{{ route('annuaire') }}">Annuaire</a>
                                     </li>
                                 </ul>
@@ -115,10 +123,10 @@
                                 Culture, Sports et Loisirs
                                 <ul class="item-sous-menu sous-menu">
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Médiathèque</a></li>
-                                    <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Equipements sportif</a>
+                                    <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Equipements sportifs</a>
                                     </li>
                                     <li class="sous-item-sous-liste sous-sous-menu"><a href="#">Equipements de
-                                            loisir</a></li>
+                                            loisirs</a></li>
                                 </ul>
                             </li>
                             <li class="items-sous-liste5 drop-item mobil">
@@ -165,35 +173,26 @@
                     <li class="nav-item mobile-item"><a href="#">C.D.C</a></li>
                 </ul>
             </nav>
+
         </div>
+
     </header>
     <div class="miseEnPage">
         <div class="img">
-            <img src="{{ asset('./MortréePhotos/IMGPageHTML.jpg') }}" alt="Vue aérienne du centre-bourg" class="imgAccueil">
+            <img src="./MortréePhotos/IMGPageAccueil_20230624_202835.jpg" alt="Vue aérienne du centre-bourg"
+                class="imgAccueil">
         </div>
         <div class="groupe">
             <div class="caseInfos">Infos &rArr;</div>
             <div class="container">
-                <span class="msg">Il est demandé à chacun de faire
+                <span class="msg">Il est demandé à chaque propriétaire de bien vouloir faire
                     le nécessaire avec les dejections de leur animal</span>
-                <span class="msg">Des composteurs collectifs sont à votre disposition </span>
-                <span class="msg">Le rammassage des sacs jaunes aura lieu le 2 Mai</span>
+                <span class="msg">Message2qszedrftyu^wxcvbn,;:azertyuiopikolpmqsdfghjklxcvbnhj,k</span>
+                <span class="msg">Message3qsdfghjklmzaertyu^qsdfghjklmùazertyuiopiopwxcvbn,;</span>
                 <!-- Ajoutez autant de messages que nécessaire -->
             </div>
         </div>
-        <div class="groupeRechercheIscription">
-        {{-- Formulaire de recherche --}}
-        <form action="{{ route('annuaire') }}" class="pb-3 pr-2 flex items-center border-b border-b-slate-300 text-slate-300 focus-within:border-b-slate-900 focus-within:text-slate-900 transition groupeRecherche">
-                <input id="search" value="{{ request()->search }}" class="px-2 w-full outline-none leading-none placeholder-slate-400 barreRecherche" type="search" name="search" placeholder="Rechercher un terme">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </div>    
-    
+    </div>
     {{-- Navigation --}}
     <nav x-data="{ open: false }" x-cloak class="relative">
         <button
@@ -276,8 +275,9 @@
         </div>
     </div>  
     @endif
-    <main>           
-        {{ $slot }}          
+
+    <main>
+        {{--{{ $slot }}--}}
     </main>
 </body>
 

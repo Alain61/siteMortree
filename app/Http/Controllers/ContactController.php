@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
-    public function showContactForm(): View//en litige
+    public function showContactForm(): View
     {
         return view('home.contact');
     }
@@ -26,11 +26,9 @@ class ContactController extends Controller
             'name' =>['required', 'string'],
             'email' => ['required', 'email'],
             'content' => ['required', 'string'],
-            'subject' => ['required', 'string'],
-            
-        ]);
+            'subject' => ['required', 'string'],            
+        ]);        
         
-        //dd(Auth::check());
         // Vérifier si l'utilisateur est connecté
         if (Auth::check()) {
             // Récupérer l'utilisateur connecté
@@ -41,26 +39,18 @@ class ContactController extends Controller
             //crée un nouveau commentaire avec les données fourni
             if($userId)
             {
-                $comment = Comment::create([
-                    
-                
+                $comment = Comment::create([                  
                     'user_id'=>Auth::id(),
                     'subject'=>$request->subject,
-                    'content'=>$request->content,
-            
+                    'content'=>$request->content,            
                 ]);
-            }
+            }            
             
-            //dd($comment); 
-            //dd($request->all());
-            //dd($user);           
-            
-            //dd($user);
             // Envoi d'un e-mail à l'administrateur avec les détails du commentaire
             Mail::to('launaydeshaies@hotmail.fr')->send(new NewCommentNotification($comment, $user));
 
-            // Redirection de l'utilisateur après l'enregistrement du commentaire
-            return redirect()->route('annuaire')->with('success', 'Votre message a été envoyé avec succès.');
+            // Redirection de l'utilisateur vers la page d'accueil après l'enregistrement du commentaire
+            return redirect()->route('accueil')->with('success', 'Votre message a été envoyé avec succès.');
 
         } else {
             // Redirection vers la page de connexion

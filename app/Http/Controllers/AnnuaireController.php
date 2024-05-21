@@ -60,8 +60,7 @@ class AnnuaireController extends Controller
 
     //methode pour renvoyer la vue de presentation d'une entité des annuaires (global, par catégories et par tags)
     public function show(Annuaire $annuaire): View
-    {
-       
+    {       
         return view('annuaires.show', [            
             'annuaire' =>$annuaire,
         ]);

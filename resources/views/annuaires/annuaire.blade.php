@@ -1,5 +1,5 @@
 <x-default-layout>
-
+    <!--affichage erreur-->
     <div class="corps">
         @if(session('success'))
             <div class="alert alert-success">
@@ -39,12 +39,13 @@
             </div>
         </div>
 
-        @if (isset($category) || isset($tag))
-            <!-- Afficher le bouton uniquement si une catégorie ou un tag est défini -->
+        <!-- Afficher le bouton uniquement si une catégorie ou un tag est défini -->
+        @if (isset($category) || isset($tag))            
             <div class="retourAnnuaireGlobal">
                 <a href="{{ route('annuaire') }}">Retour à l'annuaire global</a>
             </div>
         @endif
+        
         <!--boucle sur toutes les entités-->
         @forelse ($annuaires as $annuaire)
             <x-entite :$annuaire list />

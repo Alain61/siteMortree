@@ -11,7 +11,7 @@ class AuthLayout extends AbstractLayout
      * Create a new component instance.
      */
     
-     public function __construct(
+    public function __construct(
         public string $name = '', 
         
         public string $action ='',

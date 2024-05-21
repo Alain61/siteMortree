@@ -18,7 +18,7 @@
     <body class="h-full">
         <header class="header">
             <div class="en-tete">
-                <a href="{{ route('annuaire') }}"><img class="logo"
+                <a href="{{ route('accueil') }}"><img class="logo"
                         src="{{ asset('./MortréePhotos/blason Mortrée.PNG') }}"
                         alt="écusson"></a><!--renverra à la page index.html/ pour le moment à annuaire.blade.php-->
                 <div class="background fondNom">
@@ -46,7 +46,7 @@
         {{-- Formulaire d'authentification --}}
         <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div class="flex justify-center">
-                <a href="{{ route('annuaire') }}">
+                <a href="{{ route('accueil') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-12 h-12 text-slate-900">
                         <path stroke-linecap="round" stroke-linejoin="round"

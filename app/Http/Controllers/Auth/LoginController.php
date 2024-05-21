@@ -22,7 +22,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request):RedirectResponse
+    public function login(Request $request): RedirectResponse
     {   //verification email et mp
         $credentials = $request->validate([
             'email' => ['required', 'email'],

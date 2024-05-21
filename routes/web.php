@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AnnuaireController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,8 +41,11 @@ Route::get('/new_comment_notification', [homeController::class, 'create'])->name
 //route pour renvoyer sur la page d'accueil de l'espace membre après inscription. Il faut conserver le '/home' car laravel défini ainsi la page d'accueil de 'l'espace membre'
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
+//route pour récupérer la nouvelle page d'accueil
+Route::get('/', [PageController::class, 'accueil'])->name('accueil');//ajouté
 //route pour récupére la page d'accueil( pour le moment c la page 'annuaire')
-Route::get('/', [AnnuaireController::class, 'annuaire'])->name('annuaire');
+Route::get('/annuaire', [AnnuaireController::class, 'annuaire'])->name('annuaire');//changé
 //route pour récupérer la page par entité
 Route::get('/annuaires/{annuaire}', [AnnuaireController::class, 'show'])->name('annuaires.show');
 //route pour récupére l'annuaire par catégories

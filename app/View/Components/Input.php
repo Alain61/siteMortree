@@ -21,8 +21,7 @@ class Input extends Component
     )
     {   
         //si l'id n'a pas été renseigné, on prend la valeur 'name' 
-        $this->id ??= $this->name;
-        // équivaut à: this->id = $this->id ?? $this->name;
+        $this->id ??= $this->name;        
     }
 
     /**

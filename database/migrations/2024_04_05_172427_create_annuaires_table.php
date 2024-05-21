@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('annuaires', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30);
+            $table->string('manager');
             $table->string('slug')->unique();
             $table->string('mail')->unique();
             $table->string('phone');
